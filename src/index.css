@@ -72,7 +72,17 @@ body {
   justify-content: space-between;
 }
 
+.course h3 div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .add-form {
+  margin-bottom: 40px;
+}
+
+.edit-form {
   margin-bottom: 40px;
 }
 
