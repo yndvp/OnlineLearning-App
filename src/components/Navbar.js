@@ -2,7 +2,7 @@ import { Outlet, Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav>
+    <nav className='nav'>
       <ul>
         <li>
           <Link to='/AddStudent.js'>Are you a student?</Link>

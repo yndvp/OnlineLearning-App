@@ -55,28 +55,42 @@ body {
   width: 100%;
 }
 
-.course {
-  background: #f4f4f4;
-  margin: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-.course.reminder {
-  border-left: 5px solid green;
+.nav ul li {
+  display: inline;
+  float: left;
 }
 
-.course h3 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.nav ul li a{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
-.course h3 div{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.course{
+  width: 100%;
+  border-collapse: collapse;
 }
+
+td {
+  text-align: left;
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.thead-light th{
+  width: 20%;
+  text-align: left;
+  padding: 8px;
+}
+
 
 .add-form {
   margin-bottom: 40px;

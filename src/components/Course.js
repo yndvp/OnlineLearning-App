@@ -1,24 +1,20 @@
-import { FaTimes } from 'react-icons/fa'
 import Button from './Button'
 import EditCourse from './EditCourse'
 
 const Course = ( {course, onDelete, onEdit}) => {
   return (
-    <div className='course'>
-      <h3>
-        {course.courseName} 
-        <div>
-          <Button color={'grey'} text={'Edit Course'} onClick={() => onEdit(course)}/>
-          <FaTimes 
-              style={{ color: 'red', cursor:'pointer'}} 
-              onClick={() => onDelete(course.courseID)}/>
-        </div>
-      </h3>
-      <p>{course.instructor}</p>
-      <p>Category: {course.category}</p>
-      <p>Price: {course.price}</p>
-      <EditCourse  />
-    </div>
+    
+      <tbody>
+        <tr>
+          <td>{course.courseName}</td>
+          <td>{course.instructor}</td>
+          <td>{course.category}</td>
+          <td>{course.price}</td>
+          <td><a href="#" onClick={() => onEdit(course)}>edit</a> | <a href="#" onClick={() => onDelete(course.courseID)}>delete</a></td>
+        </tr>
+      </tbody>
+    
+
   )
 }
 
