@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { useState } from 'react';
+// import axios from 'axios';
+// import { useState } from 'react';
 
-const AddStudent = () => {
-  const [student, setStudent] = useState({});
-};
+// const AddStudent = () => {
+//   const [student, setStudent] = useState({});
+// };
 
-export default AddStudent;
+// export default AddStudent;

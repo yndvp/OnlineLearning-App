@@ -4,7 +4,7 @@ const Courses = ({courses, onDelete, onEdit}) => {
 
   return (
     <>
-      <table className="course">
+      <table className="tables">
         <thead className="thead-light">
           <tr>
             <th>Course</th>
