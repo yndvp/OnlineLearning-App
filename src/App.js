@@ -4,6 +4,9 @@ import { useState } from 'react';
 import Header from './components/Header';
 import Courses from './components/Courses';
 import AddCourse from './components/AddCourse';
+import Navbar from './components/Navbar';
+import StudentsList from './components/StudentsList';
+import InstructorsList from './components/InstructorsList';
 
 function App() {
   const [showAddCourse, setShowAddCourse] = useState(false);
@@ -51,24 +54,33 @@ function App() {
     setCourses(courses.filter((course) => course.courseID !== courseID));
   };
 
+  //edit course
+  const editCourse = (course) => {
+    const oldCourse = { course };
+    console.log(oldCourse);
+  };
+
   return (
     <Router>
-      {/* <Route path='/' exact component={ExerciesList} />
-      <Route path='/edit/:id' exact component={EditExercise} />
-      <Route path='/create' exact component={CreateExercise} />
-      <Route path='/user' exact component={CreateUser} /> */}
       <div className='container'>
+        <Navbar />
         <Header
           onAdd={() => setShowAddCourse(!showAddCourse)}
           showAdd={showAddCourse}
         />
         {showAddCourse && <AddCourse onAdd={addCourse} />}
         {courses.length > 0 ? (
-          <Courses courses={courses} onDelete={deleteCourse} />
+          <Courses
+            courses={courses}
+            onDelete={deleteCourse}
+            onEdit={editCourse}
+          />
         ) : (
           'No courses to show'
         )}
       </div>
+      {/* <Route path='/StudentsList' component={StudentsList} />
+    <Route path='/InstructorsList' component={InstructorsList} /> */}
     </Router>
   );
 }
