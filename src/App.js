@@ -7,6 +7,7 @@ import AddCourse from './components/AddCourse';
 import Navbar from './components/Navbar';
 import StudentsList from './components/StudentsList';
 import InstructorsList from './components/InstructorsList';
+import { Link } from 'react-router-dom';
 
 function App() {
   const [showAddCourse, setShowAddCourse] = useState(false);
@@ -61,7 +62,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <>
       <div className='container'>
         <Navbar />
         <Header
@@ -79,9 +80,9 @@ function App() {
           'No courses to show'
         )}
       </div>
-      {/* <Route path='/StudentsList' component={StudentsList} />
-    <Route path='/InstructorsList' component={InstructorsList} /> */}
-    </Router>
+      <Link to='/StudentsList'>Students List</Link>
+      <Link to='/InstructorsList'>instructors List</Link>
+    </>
   );
 }
 
