@@ -5,8 +5,8 @@ import Header from './components/Header';
 import Courses from './components/Courses';
 import AddCourse from './components/AddCourse';
 import Navbar from './components/Navbar';
-import StudentsList from './components/StudentsList';
-import InstructorsList from './components/InstructorsList';
+import StudentsList from './components/Students';
+import InstructorsList from './components/Instructors';
 import { Link } from 'react-router-dom';
 
 function App() {
@@ -62,27 +62,23 @@ function App() {
   };
 
   return (
-    <>
-      <div className='container'>
-        <Navbar />
-        <Header
-          onAdd={() => setShowAddCourse(!showAddCourse)}
-          showAdd={showAddCourse}
+    <div className='container'>
+      <Navbar />
+      <Header
+        onAdd={() => setShowAddCourse(!showAddCourse)}
+        showAdd={showAddCourse}
+      />
+      {showAddCourse && <AddCourse onAdd={addCourse} />}
+      {courses.length > 0 ? (
+        <Courses
+          courses={courses}
+          onDelete={deleteCourse}
+          onEdit={editCourse}
         />
-        {showAddCourse && <AddCourse onAdd={addCourse} />}
-        {courses.length > 0 ? (
-          <Courses
-            courses={courses}
-            onDelete={deleteCourse}
-            onEdit={editCourse}
-          />
-        ) : (
-          'No courses to show'
-        )}
-      </div>
-      <Link to='/StudentsList'>Students List</Link>
-      <Link to='/InstructorsList'>instructors List</Link>
-    </>
+      ) : (
+        'No courses to show'
+      )}
+    </div>
   );
 }
 

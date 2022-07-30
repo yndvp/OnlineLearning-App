@@ -1,17 +1,31 @@
+import { Outlet, Link } from 'react-router-dom';
+
 const Navbar = () => {
   return (
     <nav>
-        <li> 
-            <a href='/StudentsList'> Students </a>  
+      <ul>
+        <li>
+          <Link to='/AddStudent.js'>Are you a student?</Link>
         </li>
-        <li> 
-            <a href='/InstructorsList'> Instructors </a>  
+        <li>
+          <Link to='/AddInstructor.js'>Are you a instructor?</Link>
         </li>
-        <li> 
-            <a href='/'> Back to Courses </a>  
+        <li>
+          <Link to='/AddCourse.js'>Create a Course</Link>
         </li>
+        <li>
+          <Link to='/Students'>Students List</Link>
+        </li>
+        <li>
+          <Link to='/Instructors'>Instructors List</Link>
+        </li>
+        <li>
+          <Link to='/Courses'>Courses List</Link>
+        </li>
+      </ul>
+      <Outlet />
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
