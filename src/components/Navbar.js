@@ -5,13 +5,13 @@ const Navbar = () => {
     <nav className='nav'>
       <ul>
         <li>
-          <Link to='/AddStudent.js'>Are you a student?</Link>
+          <Link to='/AddStudent'>Are you a student?</Link>
         </li>
         <li>
-          <Link to='/AddInstructor.js'>Are you a instructor?</Link>
+          <Link to='/AddInstructor'>Are you a instructor?</Link>
         </li>
         <li>
-          <Link to='/AddCourse.js'>Create a Course</Link>
+          <Link to='/AddCourse'>Create a Course</Link>
         </li>
         <li>
           <Link to='/Students'>Students List</Link>

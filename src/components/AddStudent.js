@@ -1,8 +1,12 @@
-// import axios from 'axios';
-// import { useState } from 'react';
+import React from 'react'
 
-// const AddStudent = () => {
-//   const [student, setStudent] = useState({});
-// };
+const AddStudent = () => {
+  return (
+    <div className='container'>
+      <p>three</p>
+      
+    </div>
+  )
+}
 
-// export default AddStudent;
+export default AddStudent

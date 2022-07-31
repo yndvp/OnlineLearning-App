@@ -18,9 +18,9 @@ root.render(
         <Route path='students' element={<Students />} />
         <Route path='instructors' element={<Instructors />} />
         <Route path='courses' element={<Courses />} />
-        <Route path='add-student' element={<AddStudent />} />
-        <Route path='add-instructor' element={<AddInstructor />} />
-        <Route path='add-course' element={<AddCourse />} />
+        <Route path='AddStudent' element={<AddStudent />} />
+        <Route path='AddInstructor' element={<AddInstructor />} />
+        <Route path='AddCourse' element={<AddCourse />} />
       </Route>
     </Routes>
   </BrowserRouter>

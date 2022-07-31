@@ -59,7 +59,7 @@ const Instructors = () => {
             <td>{instructor.firstName}</td>
             <td>{instructor.lastName}</td>
             <td>{instructor.email}</td>
-            <td>{instructor.courses}</td>              
+            <td>{instructor.courses.join('\r\n')}</td>              
             <td><a href="#" >edit</a> | <a href="#" onClick={() => deleteInstructors(instructor.instructorID)}>delete</a></td>
           </tr>
         </tbody>         

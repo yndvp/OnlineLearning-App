@@ -16,6 +16,8 @@ const AddCourse = ( { onAdd }) => {
 
         onAdd ({ courseName, instructor, category, price })
 
+        console.log( courseName, instructor, category, price )
+
         setCourseName('')
         setInstructor('')
         setCategory('')
@@ -23,26 +25,29 @@ const AddCourse = ( { onAdd }) => {
     }
 
   return (
-    <form className='add-form' onSubmit={onSubmit}>
-      <div className='form-control'>
-        <label>Course</label>
-        <input type='text' placeholder='Add Course' value={courseName} onChange={(e) => setCourseName(e.target.value)}/>
-      </div>
-      <div className='form-control'>
-        <label>Instructor</label>
-        <input type='text' placeholder='Add Instructor' value={instructor} onChange={(e) => setInstructor(e.target.value)}/>
-      </div>
-      <div className='form-control'>
-        <label>Category</label>
-        <input type='text' placeholder='Add Category' value={category} onChange={(e) => setCategory(e.target.value)}/>
-      </div>
-      <div className='form-control'>
-        <label>Price</label>
-        <input type='number' placeholder='Add Price' value={price} onChange={(e) => setPrice(e.target.value)}/>
-      </div>
+    <div className='container'>
+      <h3>Add Course</h3>
+      <form className='add-form' onSubmit={onSubmit}>
+        <div className='form-control'>
+          <label>Course</label>
+          <input type='text' placeholder='Add Course' value={courseName} onChange={(e) => setCourseName(e.target.value)}/>
+        </div>
+        <div className='form-control'>
+          <label>Instructor</label>
+          <input type='text' placeholder='Add Instructor' value={instructor} onChange={(e) => setInstructor(e.target.value)}/>
+        </div>
+        <div className='form-control'>
+          <label>Category</label>
+          <input type='text' placeholder='Add Category' value={category} onChange={(e) => setCategory(e.target.value)}/>
+        </div>
+        <div className='form-control'>
+          <label>Price</label>
+          <input type='number' placeholder='Add Price' value={price} onChange={(e) => setPrice(e.target.value)}/>
+        </div>
 
-      <input type='submit' value='Save Course' className='btn btn-block'/>
-    </form>
+        <input type='submit' value='Save Course' className='btn btn-block'/>
+      </form>
+    </div>
   )
 }
 

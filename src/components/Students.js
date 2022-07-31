@@ -68,10 +68,7 @@ const Students = () => {
               <td>{student.firstName}</td>
               <td>{student.lastName}</td>
               <td>{student.email}</td>
-              {/* {student.courses.forEach((course) => (
-                  <td>{course}</td>
-                ))} */}
-              <td>{student.courses}</td>              
+              <td>{student.courses.join('\r\n')}</td>              
               <td><a href="#" >edit</a> | <a href="#" onClick={() => deleteStudent(student.studentID)}>delete</a></td>
             </tr>
           </tbody>         
