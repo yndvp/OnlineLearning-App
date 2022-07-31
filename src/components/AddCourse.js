@@ -1,6 +1,8 @@
 import { useState } from "react"
+import Courses from "./Courses"
 
-const AddCourse = ( { onAdd }) => {
+
+const AddCourse = ( ) => {
     const [courseName, setCourseName] = useState('')
     const [instructor, setInstructor] = useState('')
     const [category, setCategory] = useState('')
@@ -13,10 +15,13 @@ const AddCourse = ( { onAdd }) => {
             alert('Please add a course')
             return
         }
-
-        onAdd ({ courseName, instructor, category, price })
-
-        console.log( courseName, instructor, category, price )
+        
+        //add course
+          const courseID = Math.floor(Math.random() * 10000) + 1;
+          const newCourse = { courseID, courseName, instructor, category, price };
+          // setCourses([...courses, newCourse]);
+          console.log(newCourse)
+          // console.log(courseName, instructor, category, price)
 
         setCourseName('')
         setInstructor('')

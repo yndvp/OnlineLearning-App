@@ -33,13 +33,6 @@ const Courses = () => {
     },
   ]);
 
-  // //add course
-  // const addCourse = (course) => {
-  //   const courseID = Math.floor(Math.random() * 10000) + 1;
-  //   const newCourse = { courseID, ...course };
-  //   setCourses([...courses, newCourse]);
-  // };
-
   //delete course
   const deleteCourse = (courseID) => {
     setCourses(courses.filter((course) => course.courseID !== courseID));
