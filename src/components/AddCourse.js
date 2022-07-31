@@ -1,6 +1,4 @@
 import { useState } from "react"
-import Courses from "./Courses"
-
 
 const AddCourse = ( ) => {
     const [courseName, setCourseName] = useState('')
