@@ -11,17 +11,4 @@ import Courses from './components/Courses';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<App />}>
-        <Route path='students' element={<Students />} />
-        <Route path='instructors' element={<Instructors />} />
-        <Route path='courses' element={<Courses />} />
-        <Route path='AddStudent' element={<AddStudent />} />
-        <Route path='AddInstructor' element={<AddInstructor />} />
-        <Route path='AddCourse' element={<AddCourse />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>
-);
+root.render(<App />);

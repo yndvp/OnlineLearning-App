@@ -21,12 +21,12 @@ connection.once('open', () => {
 });
 
 // Require the files
-const exercisesRouter = require('./routes/exercises');
-const usersRouter = require('./routes/users');
+const categoriesRouter = require('./routes/categories');
+// const usersRouter = require('./routes/users');
 
 // Use the files
-app.use('/exercies', exercisesRouter);
-app.use('/users', usersRouter);
+app.use('/categories', categoriesRouter);
+// app.use('/users', usersRouter);
 
 // Starts server
 app.listen(port, () => {

@@ -1,15 +1,41 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import AddStudent from './components/AddStudent';
+import AddInstructor from './components/AddInstructor';
+import AddCourse from './components/AddCourse';
+import AddCategory from './components/AddCategory';
+import EditStudent from './components/EditStudent';
+import EditInstructor from './components/EditInstructor';
+import EditCourse from './components/EditCourse';
+import EditCategory from './components/EditCategory';
+import Students from './components/Students';
+import Instructors from './components/Instructors';
+import Courses from './components/Courses';
+import Categories from './components/Categories';
+import React from 'react';
 
 function App() {
   return (
-    <div className='container'>
-      <Header /> 
-      <Navbar />
-      
-      {/* {showAddCourse && <AddCourse onAdd={addCourse} />} */}
-      {/* {courses.length > 0 ? (
+    <Router>
+      <div className='container'>
+        <Header />
+        <Navbar />
+        <Route path='/add-student' component={AddStudent} />
+        <Route path='/add-instructor' component={AddInstructor} />
+        <Route path='/add-course' component={AddCourse} />
+        <Route path='/add-category' component={AddCategory} />
+        <Route path='/student/edit/:id' component={EditStudent} />
+        <Route path='/instructor/edit/:id' component={EditInstructor} />
+        <Route path='/course/edit/:id' component={EditCourse} />
+        <Route path='/category/edit/:id' component={EditCategory} />
+        <Route path='/students' exact component={Students} />
+        <Route path='/instructors' exact component={Instructors} />
+        <Route path='/courses' exact component={Courses} />
+        <Route path='/categories' exact component={Categories} />
+        {/* {showAddCourse && <AddCourse onAdd={addCourse} />} */}
+        {/* {courses.length > 0 ? (
         <Courses
           courses={courses}
           onDelete={deleteCourse}
@@ -18,7 +44,8 @@ function App() {
       ) : (
         'No courses to show'
       )} */}
-    </div>
+      </div>
+    </Router>
   );
 }
 

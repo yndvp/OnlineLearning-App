@@ -5,25 +5,30 @@ const Navbar = () => {
     <nav className='nav'>
       <ul>
         <li>
-          <Link to='/AddStudent'>Are you a student?</Link>
+          <Link to='/add-student'>Are you a student?</Link>
         </li>
         <li>
-          <Link to='/AddInstructor'>Are you a instructor?</Link>
+          <Link to='/add-instructor'>Are you a instructor?</Link>
         </li>
         <li>
-          <Link to='/AddCourse'>Create a Course</Link>
+          <Link to='/add-course'>Create a Course</Link>
         </li>
         <li>
-          <Link to='/Students'>Students List</Link>
+          <Link to='/add-category'>Create a Category</Link>
         </li>
         <li>
-          <Link to='/Instructors'>Instructors List</Link>
+          <Link to='/students'>Students List</Link>
         </li>
         <li>
-          <Link to='/Courses'>Courses List</Link>
+          <Link to='/instructors'>Instructors List</Link>
+        </li>
+        <li>
+          <Link to='/courses'>Courses List</Link>
+        </li>
+        <li>
+          <Link to='/categories'>Categories List</Link>
         </li>
       </ul>
-      <Outlet />
     </nav>
   );
 };
