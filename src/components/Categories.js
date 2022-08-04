@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useState } from 'react';
-import { useLayoutEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 
 const Category = (props) => (
   <tr>
@@ -15,7 +14,7 @@ const Category = (props) => (
       <a
         href='#'
         onClick={() => {
-          props.deleteExercise(props.category._id);
+          props.deleteCategory(props.category._id);
         }}
       >
         delete
@@ -60,6 +59,7 @@ const Categories = () => {
 
   return (
     <div className='container'>
+      <h3>Categories</h3>
       <table className='tables'>
         <thead className='thead-light'>
           <tr>

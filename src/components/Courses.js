@@ -1,77 +1,81 @@
-import { useState } from 'react';
+import { useState, useLayoutEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+const Course = (props) => (
+  <tr>
+    <td>{props.course._id}</td>
+    <td>{props.course.title}</td>
+    <td>{props.course.instructor}</td>
+    <td>{props.course.category}</td>
+    <td>{props.course.level}</td>
+    <td>{props.course.price}</td>
+    <td>
+      <Link to={'/course/edit/' + props.course._id}>edit</Link> |{' '}
+      <a
+        href='#'
+        onClick={() => {
+          props.deleteCourse(props.course._id);
+        }}
+      >
+        delete
+      </a>
+    </td>
+  </tr>
+);
 
 const Courses = () => {
+  const [courses, setCourses] = useState([]);
 
-  const [courses, setCourses] = useState([
-    {
-      courseID: 1,
-      courseName: 'JavaScript',
-      instructor: 'Alvira Narshidani',
-      category: 'Programming',
-      price: 19.99,
-    },
-    {
-      courseID: 2,
-      courseName: 'Linux System Administration',
-      instructor: 'Vivek Ahuja',
-      category: 'Programming',
-      price: 19.99,
-    },
-    {
-      courseID: 3,
-      courseName: 'Project Management for IT',
-      instructor: 'Linda Kettle',
-      category: 'Management',
-      price: 19.99,
-    },
-    {
-      courseID: 4,
-      courseName: 'Test',
-      instructor: 'Test',
-      category: 'Test',
-      price: 19.99,
-    },
-  ]);
+  useLayoutEffect(() => {
+    axios
+      .get('http://localhost:5000/courses/')
+      .then((response) => {
+        setCourses(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  //delete course
-  const deleteCourse = (courseID) => {
-    setCourses(courses.filter((course) => course.courseID !== courseID));
+  const deleteCoures = (id) => {
+    axios.delete('http://localhost:5000/courses/' + id).then((response) => {
+      console.log(response.data);
+    });
+
+    setCourses(courses.filter((el) => el._id !== id));
   };
 
-  // //edit course
-  // const editCourse = (course) => {
-  //   const oldCourse = { course };
-  //   console.log(oldCourse);
-  // };
+  const courseList = () => {
+    return courses.map((currentCourse) => {
+      return (
+        <Course
+          course={currentCourse}
+          deleteCourse={deleteCoures}
+          key={currentCourse._id}
+        />
+      );
+    });
+  };
 
   return (
     <div className='container'>
-      <table className="tables">
-        <thead className="thead-light">
+      <h3>Courses</h3>
+      <table className='tables'>
+        <thead className='thead-light'>
           <tr>
-            <th>Course</th>
+            <th>Course ID</th>
+            <th>Title</th>
             <th>Instructor</th>
             <th>Category</th>
+            <th>Level</th>
             <th>Price</th>
-            <th>Actions</th>
           </tr>
         </thead>
-        {courses.map((course) => (
-          
-          <tbody>
-        <tr>
-          <td>{course.courseName}</td>
-          <td>{course.instructor}</td>
-          <td>{course.category}</td>
-          <td>{course.price}</td>
-          <td><a href="#" >edit</a> | <a href="#" onClick={() => deleteCourse(course.courseID)}>delete</a></td>
-        </tr>
-      </tbody>
-          
-        ))}
+        <tbody>{courseList()}</tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default Courses
+export default Courses;

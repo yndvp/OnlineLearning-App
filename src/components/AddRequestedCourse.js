@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-const AddCategory = () => {
-  const [enteredCategory, setEnteredCategory] = useState('');
+const AddRequestedCourse = () => {
+  const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredDescription, setEnteredDescription] = useState('');
 
-  const onChangeCategory = (e) => {
-    setEnteredCategory(e.target.value);
+  const onChangeTitle = (e) => {
+    setEnteredTitle(e.target.value);
   };
 
   const onChangeDescription = (e) => {
@@ -16,35 +16,35 @@ const AddCategory = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const category = {
-      category: enteredCategory,
+    const requestedcourse = {
+      title: enteredTitle,
       description: enteredDescription,
     };
 
-    console.log(category);
+    console.log(requestedcourse);
 
     axios
-      .post('http://localhost:5000/categories/add', category)
+      .post('http://localhost:5000/requestedcourses/add', requestedcourse)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
-    window.location = '/categories';
+    window.location = '/requestedcourses';
 
-    setEnteredCategory('');
+    setEnteredTitle('');
     setEnteredDescription('');
   };
 
   return (
     <div className='container'>
-      <h3>Add Category</h3>
+      <h3>Request a Course</h3>
       <form className='add-form' onSubmit={onSubmit}>
         <div className='form-control'>
-          <label>Category</label>
+          <label>Title</label>
           <input
             type='text'
-            placeholder='Add Category'
-            value={enteredCategory}
-            onChange={onChangeCategory}
+            placeholder='Add Title'
+            value={enteredTitle}
+            onChange={onChangeTitle}
           />
         </div>
         <div className='form-control'>
@@ -56,10 +56,10 @@ const AddCategory = () => {
             onChange={onChangeDescription}
           />
         </div>
-        <input type='submit' value='Save Category' className='btn btn-block' />
+        <input type='submit' value='Make a Request' className='btn btn-block' />
       </form>
     </div>
   );
 };
 
-export default AddCategory;
+export default AddRequestedCourse;

@@ -1,80 +1,77 @@
-import React from 'react';
-// import Header from './components/Header';
-// import Navbar from './Navbar';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState, useLayoutEffect } from 'react';
+
+const Student = (props) => (
+  <tr>
+    <td>{props.student._id}</td>
+    <td>{props.student.firstName}</td>
+    <td>{props.student.lastName}</td>
+    <td>{props.student.email}</td>
+    <td>{props.student.courses.join('\r\n')}</td>
+    <td>
+      <Link to={'/student/edit/' + props.student._id}>edit</Link> |{' '}
+      <a
+        href='#'
+        onClick={() => {
+          props.deleteStudent(props.student._id);
+        }}
+      >
+        delete
+      </a>
+    </td>
+  </tr>
+);
 
 const Students = () => {
-  // const [showAddStudent, setShowAddStudent] = useState(false);
+  const [students, setStudents] = useState([]);
 
-  const [students, setStudents] = useState([
-    {
-      studentID: 1,
-      firstName: 'Yunna',
-      lastName: 'Lang',
-      email: 'yunnalang@gmail.com',
-      courses: ['Linux System Administration','Music'],
-    },
-    {
-      studentID: 2,
-      firstName: 'Marcin',
-      lastName: 'Orgacki',
-      email: 'marcinorgacki@gmail.com',
-      courses: ['Linux System Administration','Javascript','Spanish'],
-    },
-    {
-      studentID: 3,
-      firstName: 'Huidan',
-      lastName: 'Kuang',
-      email: 'huidankuang@gmail.com',
-      courses: ['React','Spanish','Japanese','Java'],
-    },
-    {
-      studentID: 4,
-      firstName: 'Test',
-      lastName: 'Test',
-      email: 'Test@gmail.com',
-      courses: ['Test','Test2'],
-    },
-  ]);
+  useLayoutEffect(() => {
+    axios
+      .get('http://localhost:5000/students/')
+      .then((response) => {
+        setStudents(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  //delete student
-  const deleteStudent = (studentID) => {
-    setStudents(students.filter((student) => student.studentID !== studentID));
+  const deleteStudent = (id) => {
+    axios.delete('http://localhost:5000/students/' + id).then((response) => {
+      console.log(response.data);
+    });
+
+    setStudents(students.filter((el) => el._id !== id));
   };
 
-  //edit student
-  // const editStudent = (student) => {
-  //   const oldStudent = { student };
-  //   console.log(oldStudent);
-  // };
-  
+  const studentList = () => {
+    return students.map((currentStudent) => {
+      return (
+        <Student
+          student={currentStudent}
+          deleteStudent={deleteStudent}
+          key={currentStudent._id}
+        />
+      );
+    });
+  };
+
   return (
     <div className='container'>
-      <>
-      <table className="tables">
-        <thead className="thead-light">
+      <h3>Students</h3>
+      <table className='tables'>
+        <thead className='thead-light'>
           <tr>
+            <th>Student ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
             <th>Courses</th>
-            <th>Actions</th>
           </tr>
         </thead>
-        {students.map((student) => (
-          
-          <tbody>
-            <tr>
-              <td>{student.firstName}</td>
-              <td>{student.lastName}</td>
-              <td>{student.email}</td>
-              <td>{student.courses.join('\r\n')}</td>              
-              <td><a href="#" >edit</a> | <a href="#" onClick={() => deleteStudent(student.studentID)}>delete</a></td>
-            </tr>
-          </tbody>         
-        ))}
+        <tbody>{studentList()}</tbody>
       </table>
-    </>
     </div>
   );
 };

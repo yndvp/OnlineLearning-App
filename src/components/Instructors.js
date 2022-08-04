@@ -1,72 +1,78 @@
-import React from 'react';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState, useLayoutEffect } from 'react';
+
+const Instructor = (props) => (
+  <tr>
+    <td>{props.instructor._id}</td>
+    <td>{props.instructor.firstName}</td>
+    <td>{props.instructor.lastName}</td>
+    <td>{props.instructor.email}</td>
+    <td>{props.instructor.courses.join('\r\n')}</td>
+    <td>
+      <Link to={'/instructor/edit/' + props.instructor._id}>edit</Link> |{' '}
+      <a
+        href='#'
+        onClick={() => {
+          props.deleteInstructor(props.instructor._id);
+        }}
+      >
+        delete
+      </a>
+    </td>
+  </tr>
+);
 
 const Instructors = () => {
-  const [instructors, setInstructors] = useState([
-    {
-      instructorID: 1,
-      firstName: 'Alvira',
-      lastName: 'Narshidani',
-      email: 'alviranarshidani@gmail.com',
-      courses: ['Javascript','Python'],
-    },
-    {
-      instructorID: 2,
-      firstName: 'Vivek',
-      lastName: 'Ahuja',
-      email: 'vivekahuja@gmail.com',
-      courses: ['Linux System Administration'],
-    },
-    {
-      instructorID: 3,
-      firstName: 'Linda',
-      lastName: 'Kettle',
-      email: 'lindakettle@gmail.com',
-      courses: ['React','Spanish','Japanese','Java'],
-    },
-    {
-      instructorID: 4,
-      firstName: 'Test',
-      lastName: 'Test',
-      email: 'Test@gmail.com',
-      courses: ['Test','Test2'],
-    },
-  ]);
+  const [instructors, setInstructors] = useState([]);
 
-  //delete Instructor
-  const deleteInstructors = (instructorID) => {
-    setInstructors(instructors.filter((instructor) => instructor.instructorID !== instructorID));
+  useLayoutEffect(() => {
+    axios
+      .get('http://localhost:5000/instructors/')
+      .then((response) => {
+        setInstructors(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const deleteInstructor = (id) => {
+    axios.delete('http://localhost:5000/instructors/' + id).then((response) => {
+      console.log(response.data);
+    });
+
+    setInstructors(instructors.filter((el) => el._id !== id));
   };
 
+  const instructorList = () => {
+    return instructors.map((currentInstructor) => {
+      return (
+        <Instructor
+          instructor={currentInstructor}
+          deleteInstructor={deleteInstructor}
+          key={currentInstructor._id}
+        />
+      );
+    });
+  };
 
   return (
     <div className='container'>
-    <>
-    <table className="tables">
-      <thead className="thead-light">
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Courses</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      {instructors.map((instructor) => (
-        
-        <tbody>
+      <h3>Instructors</h3>
+      <table className='tables'>
+        <thead className='thead-light'>
           <tr>
-            <td>{instructor.firstName}</td>
-            <td>{instructor.lastName}</td>
-            <td>{instructor.email}</td>
-            <td>{instructor.courses.join('\r\n')}</td>              
-            <td><a href="#" >edit</a> | <a href="#" onClick={() => deleteInstructors(instructor.instructorID)}>delete</a></td>
+            <th>Instructor ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Courses</th>
           </tr>
-        </tbody>         
-      ))}
-    </table>
-  </>
-  </div>
+        </thead>
+        <tbody>{instructorList()}</tbody>
+      </table>
+    </div>
   );
 };
 
