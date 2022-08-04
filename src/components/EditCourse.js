@@ -12,10 +12,9 @@ const EditCourse = () => {
   const [course, setCourse] = useState({});
   const [instructors, setInstructors] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [originalTitle, setOriginalTitle] = useState('');
 
   const { id: courseId } = useParams();
-
-  let originalTitle;
 
   useLayoutEffect(() => {
     axios
@@ -44,7 +43,7 @@ const EditCourse = () => {
       .get('http://localhost:5000/courses/' + courseId)
       .then((response) => {
         setCourse(response.data);
-        originalTitle = response.data.title;
+        setOriginalTitle(response.data.title);
         // setEnteredCategory(response.data.category);
         // setEnteredDescription(response.data.description);
         // setCategoryId(response.data._id);
@@ -72,18 +71,15 @@ const EditCourse = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const instructorIndex = instructors.findIndex(
-      (i) => i.firstName === course.instructor
-    );
+    const instructorIndex = instructors.findIndex((i) => {
+      return i.firstName == course.instructor;
+    });
     const retrievedInstructor = instructors[instructorIndex];
     const courseIndex = retrievedInstructor.courses.findIndex(
       (c) => c === originalTitle
     );
-    console.log(courseIndex);
     retrievedInstructor.courses[courseIndex] = course.title;
     const id = retrievedInstructor._id;
-    console.log(retrievedInstructor.courses[courseIndex], course.title);
-    console.log(retrievedInstructor.courses);
 
     const instructor = {
       firstName: retrievedInstructor.firstName,
@@ -91,6 +87,8 @@ const EditCourse = () => {
       email: retrievedInstructor.email,
       courses: retrievedInstructor.courses,
     };
+
+    console.log(instructor);
 
     const newCourse = {
       title: course.title,
@@ -112,7 +110,7 @@ const EditCourse = () => {
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
-    window.location = '/courses';
+    //window.location = '/courses';
   };
 
   return (
@@ -165,7 +163,7 @@ const EditCourse = () => {
           <label>Price</label>
           <input type='number' value={course.price} onChange={onChangePrice} />
         </div>
-        <input type='submit' value='Edit Category' className='btn btn-block' />
+        <input type='submit' value='Edit Course' className='btn btn-block' />
       </form>
     </div>
   );

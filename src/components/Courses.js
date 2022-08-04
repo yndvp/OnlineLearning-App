@@ -26,8 +26,20 @@ const Course = (props) => (
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
+  const [instructors, setInstructors] = useState([]);
 
   useLayoutEffect(() => {
+    axios
+      .get('http://localhost:5000/instructors/')
+      .then((response) => {
+        if (response.data.length > 0) {
+          setInstructors(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     axios
       .get('http://localhost:5000/courses/')
       .then((response) => {
@@ -42,6 +54,31 @@ const Courses = () => {
     axios.delete('http://localhost:5000/courses/' + id).then((response) => {
       console.log(response.data);
     });
+
+    const deleteIndex = courses.findIndex((c) => c._id == id);
+    const courseTitle = courses[deleteIndex].title;
+    const instructorName = courses[deleteIndex].instructor;
+    const instructorIndex = instructors.findIndex(
+      (i) => i.firstName == instructorName
+    );
+    const theInstructor = instructors[instructorIndex];
+    const index = theInstructor.courses.findIndex((c) => c == courseTitle);
+    const arr = theInstructor.courses.filter((c) => c !== courseTitle);
+
+    const instructor = {
+      firstName: theInstructor.firstName,
+      lastName: theInstructor.lastName,
+      email: theInstructor.email,
+      courses: arr,
+    };
+
+    axios
+      .post(
+        'http://localhost:5000/instructors/update/' + theInstructor._id,
+        instructor
+      )
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
 
     setCourses(courses.filter((el) => el._id !== id));
   };

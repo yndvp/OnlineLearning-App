@@ -8,7 +8,7 @@ const Instructor = (props) => (
     <td>{props.instructor.firstName}</td>
     <td>{props.instructor.lastName}</td>
     <td>{props.instructor.email}</td>
-    <td>{props.instructor.courses.join('\r\n')}</td>
+    <td>{props.instructor.courses.join(', ')}</td>
     <td>
       <Link to={'/instructor/edit/' + props.instructor._id}>edit</Link> |{' '}
       <a
