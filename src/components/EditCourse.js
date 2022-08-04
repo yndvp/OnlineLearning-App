@@ -110,7 +110,7 @@ const EditCourse = () => {
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
-    //window.location = '/courses';
+    window.location = '/courses';
   };
 
   return (
