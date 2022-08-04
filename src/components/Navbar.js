@@ -17,16 +17,26 @@ const Navbar = () => {
           <Link to='/add-category'>Create a Category</Link>
         </li>
         <li>
-          <Link to='/students'>Students List</Link>
+          <Link to='/add-requestedcourse'>Request a Course</Link>
+        </li>
+        <br />
+        <li>
+          <Link to='/students'>Students</Link>
         </li>
         <li>
-          <Link to='/instructors'>Instructors List</Link>
+          <Link to='/instructors'>Instructors</Link>
         </li>
         <li>
-          <Link to='/courses'>Courses List</Link>
+          <Link to='/courses'>Courses</Link>
         </li>
         <li>
-          <Link to='/categories'>Categories List</Link>
+          <Link to='/categories'>Categories</Link>
+        </li>
+        <li>
+          <Link to='/requestedcourses'>Requested Courses</Link>
+        </li>
+        <li>
+          <Link to='/buy-course'>Buy a Course</Link>
         </li>
       </ul>
     </nav>
